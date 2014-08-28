@@ -21,11 +21,12 @@ namespace RenderModel
         }
 
         public static Bitmap DrawMandelbrot(double rMin, double iMin, double rMax, double iMax, int width, int height,
-            int startX = 0, int? end_x = null)
+            int inf_n = 255, int startX = 0, int? end_x = null)
         {
             width = width - width % 256;
             height = height - height % 256;
             end_x = end_x == null ? width : end_x;
+            inf_n = inf_n > 255 ? 255 : inf_n;
             List<Color> Palette = GenerateColorPalette();
             FastBitmap img = new FastBitmap((int)end_x - startX, height); // Bitmap to contain the set
 
@@ -38,7 +39,7 @@ namespace RenderModel
                 {
                     Complex c = new Complex(x * rScale + rMin, y * iScale + iMin); // Scaled complex number
                     Complex z = c;
-                    for (int i = 0; i < Palette.Count; i++) // 255 iterations with the method we already wrote
+                    for (int i = 0; i < inf_n; i++)
                     {
                         if (z.Magnitude >= 2.0)
                         {

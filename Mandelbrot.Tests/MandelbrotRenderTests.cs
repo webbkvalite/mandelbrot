@@ -12,7 +12,7 @@ namespace Mandelbrot.Tests
         [TestMethod]
         public void TestDrawMandelbrot()
         {
-            Bitmap fractal = RenderMandelbrot.DrawMandelbrot(-2.5, -1.0, 1.0, 1.0, 256, 256,64,127);
+            Bitmap fractal = RenderMandelbrot.DrawMandelbrot(-2.5, -1.0, 1.0, 1.0, 256, 256,255,127,191);
             var path = System.Environment.CurrentDirectory + "/fractal.bmp";
             fractal.Save(path);
         }
