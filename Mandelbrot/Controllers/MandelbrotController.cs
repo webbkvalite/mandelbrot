@@ -23,9 +23,11 @@ namespace Mandelbrot.Controllers
         /// <param name="y"></param>
         /// <param name="inf_n"></param>
         /// <returns></returns>
-        public ActionResult Index(double min_c_re, double min_c_im, double max_c_re, double max_c_im, int x, int y, int inf_n)
+        public ActionResult Index(double min_c_re, double min_c_im, double max_c_re, double max_c_im, int x, int y
+            , int inf_n, int start_x=0, int? end_x=null)
         {
-            Bitmap resultImg = RenderMandelbrot.DrawMandelbrot(min_c_re, min_c_im, max_c_re, max_c_im, x, y);
+            Bitmap resultImg = RenderMandelbrot.DrawMandelbrot(min_c_re, min_c_im, max_c_re, max_c_im,
+                x, y, start_x, end_x);
             FileContentResult result;
 
             using (var memStream = new System.IO.MemoryStream())

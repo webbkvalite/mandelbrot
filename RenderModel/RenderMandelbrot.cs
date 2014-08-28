@@ -20,15 +20,19 @@ namespace RenderModel
             return retVal;
         }
 
-        public static Bitmap DrawMandelbrot(double rMin, double iMin, double rMax, double iMax, int width, int height)
+        public static Bitmap DrawMandelbrot(double rMin, double iMin, double rMax, double iMax, int width, int height,
+            int startX = 0, int? end_x = null)
         {
+            width = width - width % 256;
+            height = height - height % 256;
+            end_x = end_x == null ? width : end_x;
             List<Color> Palette = GenerateColorPalette();
-            FastBitmap img = new FastBitmap(width, height); // Bitmap to contain the set
+            FastBitmap img = new FastBitmap((int)end_x - startX, height); // Bitmap to contain the set
 
             double rScale = (Math.Abs(rMin) + Math.Abs(rMax)) / width; // Amount to move each pixel in the real numbers
             double iScale = (Math.Abs(iMin) + Math.Abs(iMax)) / height; // Amount to move each pixel in the imaginary numbers
 
-            for (int x = 0; x < width; x++)
+            for (int x = startX; x < end_x; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
