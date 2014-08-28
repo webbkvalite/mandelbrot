@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Mandelbrot";
+}
+
+<div class="jumbotron">
+    <h1>Mandelbrot Rendering</h1>
+</div>
+
+<div class="row">
+    <div>
+        <img src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=299&y=200&inf_n=255" />
+    </div>
+</div>
+@section scripts{
+    @*<script type="text/javascript" src="/Scripts/parallellRender.js"></script>*@
+    }
