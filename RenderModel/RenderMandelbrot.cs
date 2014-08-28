@@ -39,7 +39,7 @@ namespace RenderModel
                 {
                     Complex c = new Complex(x * rScale + rMin, y * iScale + iMin); // Scaled complex number
                     Complex z = c;
-                    for (int i = 0; i < inf_n; i++)
+                    for (int i = 255; i > 0; i = i - 255/inf_n)
                     {
                         if (z.Magnitude >= 2.0)
                         {
