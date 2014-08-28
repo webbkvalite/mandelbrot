@@ -8,12 +8,20 @@
 
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div id="imageWrapper">
+        <div id="imageWrapper" style="height: 256px;">
             <div class="imageRow">
-                <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=255&start_x=0&end_x=63" />
-                <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=255&start_x=64&end_x=127" />
-                <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=255&start_x=128&end_x=191" />
-                <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=255&start_x=192&end_x=255" />
+                <div class="partialImage" style="left:0px;">
+                    <img src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=255&start_x=0&end_x=63" />
+                </div>
+                <div class="partialImage" style="left:63px;">
+                    <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=255&start_x=64&end_x=127" />
+                </div>
+                <div class="partialImage" style="left:127px;">
+                    <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=255&start_x=128&end_x=191" />
+                </div>
+                <div class="partialImage" style="left:191px;">
+                    <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=255&start_x=192&end_x=255" />
+                </div>
             </div>
         </div>
     </div>

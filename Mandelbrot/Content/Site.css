@@ -42,7 +42,9 @@ input[type="checkbox"].input-validation-error {
 }
 
 .partialImage {
-float: left;
+position: absolute;
+width: 64px;
+height: 256px;
 }
 
 .imageRow {
