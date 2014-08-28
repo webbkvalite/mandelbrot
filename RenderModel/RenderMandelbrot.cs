@@ -42,7 +42,7 @@ namespace RenderModel
                     {
                         if (z.Magnitude >= 2.0)
                         {
-                            img.SetPixel(x, y, Palette[i]); // Set the pixel if the magnitude is greater than two
+                            img.SetPixel(x - startX, y, Palette[i]); // Set the pixel if the magnitude is greater than two
                             break; // We're done with this loop
                         }
                         else
