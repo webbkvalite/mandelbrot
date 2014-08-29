@@ -1,6 +1,9 @@
 ﻿"use strict";
 
+//Set namespace
 var mandelbrot = mandelbrot || {};
+
+//Store fractals
 mandelbrot.fractals = [];
 
 $(document).ready(
@@ -34,9 +37,6 @@ $(document).ready(
             return false;
         });
 
-        mandelbrot.init = function () {
-        };
-
     });
 
 function Fractal(min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_threads) {
@@ -49,22 +49,20 @@ function Fractal(min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_threads)
         return number;
     }
 
-    //var xhr = $.ajax({
-    //    type: "GET",
-    //    url: "/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=256&start_x=0&end_x=63",
-    //    headers: {
-    //        "accept": "image/bmp",
-    //        "content-Type": "application/json",
-    //    }
-    //}).done(function (data) {
-    //    $('#mandelWrapper').html('<img src="data:image/bmp;base64,' + data + '" />');
-    //});
+    var img = $("<img />").attr('src', 'http://somedomain.com/image.jpg')
+    .load(function () {
+        if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+            alert('broken image!');
+        } else {
+            $("#something").append(img);
+        }
+    });
 
     //Apply modulo 256
     x = x - x % 256;
     y = y - y % 256;
 
-    //Calculate image partitions in whole pixels.
+    //Calculate image partitions in whole pixels
     var partitionWidth = Math.floor(x / p_threads);
 
     //Prepare render data for display
@@ -93,7 +91,8 @@ function Fractal(min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_threads)
         min_c_re + "&min_c_im=" + min_c_im + "&max_c_re=" + max_c_re + "&max_c_im=" + max_c_im + "&x=" + x + "&y=" + y +
         "&inf_n=" + inf_n + "&start_x=" + (partitionWidth * (p_threads - 1)) + "&end_x=" + x + "' />";
     imageElement += "</div>";
-    $("#mandelWrapper").prepend("<div class='fractalSet' style='height: " + (+y + 20) + "px'>" + header +
+    var wrapperHeight = y + 20 > 340 ? y + 20 : 340;
+    $("#mandelWrapper").prepend("<div class='fractalSet' style='height: " + wrapperHeight + "px'>" + header +
         min_c_reLabel + min_c_imLabel + max_c_reLabel + max_c_imLabel +
         xLabel + yLabel + inf_nLabel + p_threadsLabel + startTime + imageElement + "</div>");
 }
