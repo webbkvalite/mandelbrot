@@ -8,24 +8,43 @@
 
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div id="imageWrapper" style="height: 256px;">
-            <div class="imageRow">
-                <div class="partialImage" style="left:0px;">
-                    <img src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=256&start_x=0&end_x=63" />
-                </div>
-                <div class="partialImage" style="left:63px;">
-                    <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=256&start_x=64&end_x=127" />
-                </div>
-                <div class="partialImage" style="left:127px;">
-                    <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=256&start_x=128&end_x=191" />
-                </div>
-                <div class="partialImage" style="left:191px;">
-                    <img class="partialImage" src="/mandelbrot?min_c_re=-2.5&min_c_im=-1.0&max_c_re=1&max_c_im=1&x=256&y=256&inf_n=256&start_x=192&end_x=255" />
-                </div>
+        <h2>Enter params for mandelbrot</h2>
+        <form>
+            <div id="formColumn">
+                <label for="min_c_re">Min C real</label>
+                <input type="number" name="min_c_re" id="min_c_re" required />
+
+                <label for="min_c_im">Min C imaginary</label>
+                <input type="number" name="min_c_im" id="min_c_im" required />
+
+                <label for="max_c_re">Max C real</label>
+                <input type="number" name="max_c_re" id="max_c_re" required />
+
+                <label for="max_c_im">Max C imaginary</label>
+                <input type="number" name="max_c_im" id="max_c_im" required />
             </div>
+            <div id="formColumn">
+
+                <label for="x">Width (pixels, modulo 256)</label>
+                <input type="number" name="x" id="x" required />
+
+                <label for="y">Height (pixels, modulo 256)</label>
+                <input type="number" name="y" id="y" required />
+
+                <label for="inf_n">Max iterations (1-255)</label>
+                <input type="number" name="inf_n" id="inf_n" required />
+
+                <label for="p_threads">Number of parallell threads</label>
+                <input type="number" name="p_threads" id="p_threads" required />
+            </div>
+
+            <input type="submit" id="renderMandelbrot" value="Render" />
+        </form>
+        <div id="mandelWrapper">
+
         </div>
     </div>
 </div>
 @section scripts{
-    @*<script type="text/javascript" src="/Scripts/parallellRender.js"></script>*@
+    <script type="text/javascript" src="/Scripts/mandelbrotRender.js"></script>
 }

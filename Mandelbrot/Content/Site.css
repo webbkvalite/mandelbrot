@@ -41,13 +41,49 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-.partialImage {
-position: absolute;
-width: 64px;
-height: 256px;
-}
-
 .imageRow {
 clear: both;
 }
 
+.fractalInputLabel {
+width: 131px;
+display: inline-block;
+}
+
+.fractalSet {
+border-top: solid 2px;
+padding: 0 15px 10px;
+position: relative;
+}
+
+.fractalSet img {
+position: absolute;
+top: 15px;
+}
+
+label {
+display: block;
+margin-top: 14px;
+}
+
+#formColumn {
+width: 250px;
+float: left;
+margin-bottom: 16px;
+}
+
+#renderMandelbrot {
+clear: both;
+display: block;
+margin-bottom: 15px;
+}
+
+footer {
+padding-top: 50px;
+}
+
+.partialImageWrapper {
+position: absolute;
+top: 0;
+left: 240px;
+}
