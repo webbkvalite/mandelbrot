@@ -5,6 +5,10 @@ function Fractal(id, min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_thre
     var partitionCounter = 1;
     var startDate = new Date();
 
+    //Array of servers to distribute the calculation load upon
+    var serverURLs = ["http://mandelbrot.azurewebsites.net", "http://mandelbrot2.azurewebsites.net"];
+
+
     //**************** Help functions *****************
     //Fills in zeros in time stamps
     var checkZero = function (number) {
@@ -22,10 +26,10 @@ function Fractal(id, min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_thre
 
     //Creates the GET request for Fractal BMP
     //Handles timer for Fractal partitions
-    var loadNewPartition = function (start_x, end_x) {
+    var loadNewPartition = function (start_x, end_x, serverURL) {
         var img = $("<img />")
             .attr("style", "left: " + start_x + "px")
-            .attr("src", "/mandelbrot?min_c_re=" + min_c_re + "&min_c_im=" + min_c_im +
+            .attr("src", serverURL + "/mandelbrot?min_c_re=" + min_c_re + "&min_c_im=" + min_c_im +
             "&max_c_re=" + max_c_re + "&max_c_im=" + max_c_im + "&x=" + x + "&y=" + y +
             "&inf_n=" + inf_n + "&start_x=" + start_x + "&end_x=" + end_x + "&fast_bitmap=" + fast_bitmap + 
             "&nocache=" + Date.now())
@@ -77,10 +81,10 @@ function Fractal(id, min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_thre
     var imageElement = "<div class='partialImageWrapper'></div>";
     for (var i = 0; i < p_threads - 1; i++) {
         //Renders all parts except last one
-        loadNewPartition(i * partitionWidth, (i + 1) * partitionWidth);
+        loadNewPartition(i * partitionWidth, (i + 1) * partitionWidth, serverURLs[(i % serverURLs.length)]);
     }
     //Last image partition compensates for rounding.
-    loadNewPartition(partitionWidth * (p_threads - 1), x);
+    loadNewPartition(partitionWidth * (p_threads - 1), x, serverURLs[(p_threads-1) % serverURLs.length]);
     //Styling
     var wrapperHeight = y + 20 > 340 ? y + 20 : 340;
     //Prepend to DOM
