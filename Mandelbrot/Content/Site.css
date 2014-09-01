@@ -50,6 +50,11 @@ width: 153px;
 display: inline-block;
 }
 
+.elapsedTime .fractalInputLabel {
+width: 129px;
+display: inline-block;
+}
+
 .fractalSet {
 border-top: solid 2px;
 padding: 0 15px 10px;
@@ -87,3 +92,9 @@ position: absolute;
 top: 0;
 left: 240px;
 }
+
+.elapsedTime {
+font-weight: bold;
+margin: -5px 0 14px 15px;
+}
+

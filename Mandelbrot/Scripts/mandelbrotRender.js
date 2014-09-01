@@ -72,8 +72,8 @@ function Fractal(id, min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_thre
                 var endTimeLabel = "<p><span class='fractalInputLabel'>Partition " + partitionCounter +
                     " finished at:</span><span>" + renderTime(endDate) + "</span></p>";
                 $("#mandelWrapper #fractalId_" + id).append(endTimeLabel);
-                var endTimeDifference = "<p><span class='fractalInputLabel'>Elapsed time:</span><span>" +
-                    renderTime(endDate - startDate) + "</span></p>"; //Fixa detta!!!!
+                var endTimeDifference = "<p class='elapsedTime'><span class='fractalInputLabel'>Elapsed time:</span><span>" +
+                    ((endDate - startDate)/1000).toString() + " sec</span></p>";
                 $("#mandelWrapper #fractalId_" + id).append(endTimeDifference);
                 partitionCounter += 1;
             }
