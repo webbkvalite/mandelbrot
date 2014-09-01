@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2>Enter params for mandelbrot</h2>
-        <form>
+        <form id="fractalForm">
             <div id="formColumn">
                 <label for="min_c_re">Min C real</label>
                 <input type="number" name="min_c_re" id="min_c_re" required />
@@ -36,6 +36,9 @@
 
                 <label for="p_threads">Number of parallell threads</label>
                 <input type="number" name="p_threads" id="p_threads" required />
+
+                <label for="fast_bitmap">Fast bitmap (may lead to unexpected server shutdown)</label>
+                <input type="checkbox" name="fast_bitmap" id="fast_bitmap" />
             </div>
 
             <input type="submit" id="renderMandelbrot" value="Render" />
@@ -46,5 +49,7 @@
     </div>
 </div>
 @section scripts{
-    <script type="text/javascript" src="/Scripts/mandelbrotRender.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/Scripts/Mandelbrot/Fractal.js"></script>
+    <script type="text/javascript" src="/Scripts/Mandelbrot/mandelbrotRender.js"></script>
 }

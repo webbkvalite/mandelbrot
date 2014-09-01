@@ -5,12 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Numerics;
+using RenderModel.Abstract;
 
 namespace RenderModel
 {
-    public static class RenderMandelbrot
+    public class MandelbrotFractal
     {
-        public static List<Color> GenerateColorPalette()
+
+        IFractalBitmap image;
+
+        public MandelbrotFractal(IFractalBitmap renderBitmap)
+        {
+            image = renderBitmap;
+        }
+
+        public List<Color> GenerateColorPalette()
         {
             List<Color> retVal = new List<Color>();
             for (int i = 0; i <= 255; i++)
@@ -20,16 +29,38 @@ namespace RenderModel
             return retVal;
         }
 
-        public static Bitmap DrawMandelbrot(double rMin, double iMin, double rMax, double iMax, int width, int height,
+        public Bitmap Draw(double rMin, double iMin, double rMax, double iMax, int width, int height,
             int inf_n = 255, int startX = 0, int? end_x = null)
         {
+            //Check input
+            if (width < 1)
+            {
+                throw new ArgumentOutOfRangeException("Width must be a positive number");
+            }
+
+            if (height < 1)
+            {
+                throw new ArgumentOutOfRangeException("Height must be a positive number");
+            }
+
+            if (inf_n < 1 || inf_n > 255)
+            {
+                throw new ArgumentOutOfRangeException("inf_n must be within the interval 1 - 255");
+            }
+
+            end_x = end_x == null ? width : end_x;
+
+            //Apply modulo 256
             width = width - width % 256;
             height = height - height % 256;
-            end_x = end_x == null ? width : end_x;
-            inf_n = inf_n > 255 ? 255 : inf_n;
-            List<Color> Palette = GenerateColorPalette();
-            FastBitmap img = new FastBitmap((int)end_x - startX, height); // Bitmap to contain the set
 
+            if (startX < 0 || startX > width)
+            {
+                throw new ArgumentOutOfRangeException("StartX must be within the width");
+            }
+
+
+            List<Color> Palette = GenerateColorPalette();
             double rScale = (Math.Abs(rMin) + Math.Abs(rMax)) / width; // Amount to move each pixel in the real numbers
             double iScale = (Math.Abs(iMin) + Math.Abs(iMax)) / height; // Amount to move each pixel in the imaginary numbers
 
@@ -39,11 +70,11 @@ namespace RenderModel
                 {
                     Complex c = new Complex(x * rScale + rMin, y * iScale + iMin); // Scaled complex number
                     Complex z = c;
-                    for (int i = 255; i > 0; i = i - 255/inf_n)
+                    for (int i = 255; i > 0; i = i - 255/inf_n) //Vary decrements with total number of iterations
                     {
                         if (z.Magnitude >= 2.0)
                         {
-                            img.SetPixel(x - startX, y, Palette[i]); // Set the pixel if the magnitude is greater than two
+                            image.SetPixel(x - startX, y, Palette[i]); // Set the pixel if the magnitude is greater than two
                             break; // We're done with this loop
                         }
                         else
@@ -54,7 +85,7 @@ namespace RenderModel
                 }
             }
 
-            return img.Bitmap;
+            return image.getBitmap();
         }
     }
 }

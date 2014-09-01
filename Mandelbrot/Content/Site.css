@@ -98,3 +98,8 @@ font-weight: bold;
 margin: -5px 0 14px 15px;
 }
 
+.error {
+color: red;
+margin-top: 3px;
+}
+

@@ -5,13 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Imaging;
+using RenderModel.Abstract;
 
-namespace RenderModel
+namespace RenderModel.BitmapVariations
 {
-    public class FastBitmap
+    public class FastBitmap : IFractalBitmap
     {
+        public Bitmap Bitmap{get;set;}
+
         public FastBitmap(int width, int height)
         {
+            //Check input
+            if (width < 1)
+            {
+                throw new ArgumentOutOfRangeException("Width must be a positive number");
+            }
+
+            if (height < 1)
+            {
+                throw new ArgumentOutOfRangeException("Height must be a positive number");
+            }
             this.Bitmap = new Bitmap(width, height, PixelFormat.Format24bppRgb);
         }
 
@@ -30,10 +43,8 @@ namespace RenderModel
             this.Bitmap.UnlockBits(data); // Set the data again
         }
 
-        public Bitmap Bitmap
-        {
-            get;
-            set;
+        public Bitmap getBitmap() {
+            return Bitmap;
         }
     }
 }
