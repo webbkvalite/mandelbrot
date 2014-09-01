@@ -5,7 +5,8 @@ function Fractal(id, min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_thre
     var partitionCounter = 1;
     var startDate = new Date();
 
-    //Help functions
+    //**************** Help functions *****************
+    //Fills in zeros in time stamps
     var checkZero = function (number) {
         if (number.length == 1) {
             return "0" + number;
@@ -13,17 +14,21 @@ function Fractal(id, min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_thre
         return number;
     }
 
+    //Renders time part from JS date
     var renderTime = function (date) {
         return checkZero(date.getHours().toString()) + ":" + checkZero(date.getMinutes().toString()) + ":" +
             checkZero(date.getSeconds().toString());
     }
 
+    //Creates the GET request for Fractal BMP
+    //Handles timer for Fractal partitions
     var loadNewPartition = function (start_x, end_x) {
         var img = $("<img />")
             .attr("style", "left: " + start_x + "px")
             .attr("src", "/mandelbrot?min_c_re=" + min_c_re + "&min_c_im=" + min_c_im +
             "&max_c_re=" + max_c_re + "&max_c_im=" + max_c_im + "&x=" + x + "&y=" + y +
-            "&inf_n=" + inf_n + "&start_x=" + start_x + "&end_x=" + end_x + "&fast_bitmap=" + fast_bitmap)
+            "&inf_n=" + inf_n + "&start_x=" + start_x + "&end_x=" + end_x + "&fast_bitmap=" + fast_bitmap + 
+            "&nocache=" + Date.now())
         .load(function () {
             if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
                 alert('could not render fractal partition: ' + partitionCounter);
@@ -41,6 +46,8 @@ function Fractal(id, min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_thre
             }
         });
     };
+
+    //**************** End of Help functions *****************
 
     //Apply modulo 256 to input
     x = x - x % 256;
@@ -65,6 +72,8 @@ function Fractal(id, min_c_re, min_c_im, max_c_re, max_c_im, x, y, inf_n, p_thre
     }
     fast_bitmapLabel += " /></p>";
     var startTimeLabel = "<p><span class='fractalInputLabel'>Started:</span><span>" + renderTime(startDate) + "</span></p>";
+
+    //Create Fractal partitions
     var imageElement = "<div class='partialImageWrapper'></div>";
     for (var i = 0; i < p_threads - 1; i++) {
         //Renders all parts except last one

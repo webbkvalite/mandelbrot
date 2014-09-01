@@ -9,6 +9,10 @@ using RenderModel.Abstract;
 
 namespace RenderModel.BitmapVariations
 {
+    /// <summary>
+    /// Standard .net Bitmap handling.
+    /// SetPixel method will suffer performance on large bitmaps.
+    /// </summary>
     public class SafeBitmap : IFractalBitmap
     {
         public Bitmap Bitmap { get; set; }
@@ -18,12 +22,12 @@ namespace RenderModel.BitmapVariations
             //Check input
             if (width < 1)
             {
-                throw new ArgumentOutOfRangeException("Width must be a positive number");
+                throw new ArgumentOutOfRangeException("width", "Width must be a positive number.");
             }
 
             if (height < 1)
             {
-                throw new ArgumentOutOfRangeException("Height must be a positive number");
+                throw new ArgumentOutOfRangeException("height", "Height must be a positive number.");
             }
             this.Bitmap = new Bitmap(width, height, PixelFormat.Format24bppRgb);
         }

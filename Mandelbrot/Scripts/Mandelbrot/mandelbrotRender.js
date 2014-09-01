@@ -53,13 +53,14 @@ $(document).ready(
                 }
             });
             if ($("#fractalForm").valid()) {
+                //Create Fractal
                 mandelbrot.fractals.push(new Fractal(mandelbrot.fractals.length, mandelbrot.min_c_re.val(), mandelbrot.min_c_im.val(),
                 mandelbrot.max_c_re.val(), mandelbrot.max_c_im.val(), mandelbrot.x.val(), mandelbrot.y.val(),
                  mandelbrot.inf_n.val(), mandelbrot.p_threads.val(), mandelbrot.fast_bitmap.is(':checked')));
             } else {
-
+                //Any extra notifications of failed validation go here.
             }
-            return false;
+            return false; //Do not POST form
         });
 
     });

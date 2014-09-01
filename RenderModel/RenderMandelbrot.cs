@@ -11,7 +11,9 @@ namespace RenderModel
 {
     public class MandelbrotFractal
     {
-
+        /// <summary>
+        /// Worker bitmap for rendering and final result.
+        /// </summary>
         IFractalBitmap image;
 
         public MandelbrotFractal(IFractalBitmap renderBitmap)
@@ -19,6 +21,11 @@ namespace RenderModel
             image = renderBitmap;
         }
 
+        /// <summary>
+        /// Determines the 255 colors used by the fractal.
+        /// Set on greyscale.
+        /// </summary>
+        /// <returns>List of Color-structs.</returns>
         public List<Color> GenerateColorPalette()
         {
             List<Color> retVal = new List<Color>();
@@ -29,23 +36,36 @@ namespace RenderModel
             return retVal;
         }
 
+        /// <summary>
+        /// Generates Mandelbrot fractal with bitmap from constructor.
+        /// </summary>
+        /// <param name="rMin">Real Minimum</param>
+        /// <param name="iMin">Imaginary Minimum</param>
+        /// <param name="rMax">Real Maximum</param>
+        /// <param name="iMax">Imaginary Maximum</param>
+        /// <param name="width">Total width of fractal</param>
+        /// <param name="height">Total height of fractal</param>
+        /// <param name="inf_n">Max number of iterations. Cannot exceed Color Palette. Optional.</param>
+        /// <param name="startX">Starting X-coordinate for this partition of the fractal (optional)</param>
+        /// <param name="end_x">Ending X-coordinate for this partition of the fractal (optional)</param>
+        /// <returns>Rendered bitmap</returns>
         public Bitmap Draw(double rMin, double iMin, double rMax, double iMax, int width, int height,
             int inf_n = 255, int startX = 0, int? end_x = null)
         {
             //Check input
             if (width < 1)
             {
-                throw new ArgumentOutOfRangeException("Width must be a positive number");
+                throw new ArgumentOutOfRangeException("width", "Width must be a positive number.");
             }
 
             if (height < 1)
             {
-                throw new ArgumentOutOfRangeException("Height must be a positive number");
+                throw new ArgumentOutOfRangeException("height", "Height must be a positive number.");
             }
 
             if (inf_n < 1 || inf_n > 255)
             {
-                throw new ArgumentOutOfRangeException("inf_n must be within the interval 1 - 255");
+                throw new ArgumentOutOfRangeException("inf_n", "inf_n must be within the interval 1 - 255.");
             }
 
             end_x = end_x == null ? width : end_x;
@@ -56,7 +76,7 @@ namespace RenderModel
 
             if (startX < 0 || startX > width)
             {
-                throw new ArgumentOutOfRangeException("StartX must be within the width");
+                throw new ArgumentOutOfRangeException("startX", "StartX must be within the width.");
             }
 
 
