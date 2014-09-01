@@ -46,7 +46,7 @@
     <Compile Include="Abstract\IFractalBitmap.cs" />
     <Compile Include="BitmapVariations\SafeBitmap.cs" />
     <Compile Include="BitmapVariations\FastBitmap.cs" />
-    <Compile Include="RenderMandelbrot.cs" />
+    <Compile Include="MandelbrotFractal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

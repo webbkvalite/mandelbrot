@@ -24,10 +24,10 @@ $(document).ready(
         mandelbrot.min_c_im.val(-1.0);
         mandelbrot.max_c_re.val(1);
         mandelbrot.max_c_im.val(1);
-        mandelbrot.x.val(256);
-        mandelbrot.y.val(256);
-        mandelbrot.inf_n.val(255);
-        mandelbrot.p_threads.val(4);
+        mandelbrot.x.val(1024);
+        mandelbrot.y.val(1024);
+        mandelbrot.inf_n.val(128);
+        mandelbrot.p_threads.val(12);
         mandelbrot.fast_bitmap.val(1);
 
 
