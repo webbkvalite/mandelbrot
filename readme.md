@@ -44,3 +44,7 @@ The FastBitmap-class is a faster version of the standard .net Bitmap-class that 
 However, the majority of time consumption lies in the mathematical calculations. FastBitmap uses byte pointers that may
 cause the server to crash without warning if it runs outside of its boundaries, which is the reason for the strict validation
 rules.
+
+###Unit Tests
+Unit testing is provided for the MandelbrotFractal-class, testing the usage of the bitmap class and input validation.
+Files found in Mandelbrot.Tests

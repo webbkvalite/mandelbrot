@@ -79,6 +79,11 @@ namespace RenderModel
                 throw new ArgumentOutOfRangeException("startX", "StartX must be within the width.");
             }
 
+            if (end_x < startX || end_x > width)
+            {
+                throw new ArgumentOutOfRangeException("end_x", "End_x must be within the width.");
+            }
+
 
             List<Color> Palette = GenerateColorPalette();
             double rScale = (Math.Abs(rMin) + Math.Abs(rMax)) / width; // Amount to move each pixel in the real numbers
