@@ -6,12 +6,17 @@ work before joining the pieces back together.
 ## Current setup
 The webserver is currently setup on two domains: mandelbrot.azurewebsites.net and mandelbrot2.azurewebsites.net
 
-The webserver will automatically assign available threads to incoming requests and put remaining requests on hold.
+It doesn't matter which domain is used since the client on each domain knows about all server instances and
+will distribute the work equally between the servers. The server URLs are currently hard-coded into the client,
+but in a bigger setup, the client could ask a central server for all currently available servers, 
+or even ask the central server to spin up new instances according to the need.
+
+Each webserver automatically assigns available threads to incoming requests and puts any remaining requests on hold.
 An optimal performance is therefore achieved by using a proportionate number of parallell requests, weighing in
 losses in setting up too many requests versus the strength of parallell processing.
 
 Each domain is currently hosted in Azure's "shared mode", which means a maximum of six instances. The exact amount of available 
-cores and threads is therefore difficult to determine, but a good performance is usually achieved with 5 - 20 parallell threads, 
+cores and threads is therefore difficult to determine, but a good performance is usually achieved with 2 - 20 parallell threads, 
 depending on the size of the fractal.
 
 ### Limitations
@@ -19,6 +24,7 @@ There are memory limitations on Azure instances that can be surpassed with big f
 These limitations are also more quickly surpassed with high numbers of iterations.
 
 In order to get best possible control of the performance and limitations, dedicated server instances should be used.
+These servers have greater memory capacity and a predicted number of available cores.
 
 ## Quick overview of Classes
 ### Client Classes
@@ -36,4 +42,5 @@ and a MandelbrotFractal-class that contains server-side validation and render lo
 
 The FastBitmap-class is a faster version of the standard .net Bitmap-class that suffers in performance for big bitmaps.
 However, the majority of time consumption lies in the mathematical calculations. FastBitmap uses byte pointers that may
-cause the server to crash without warning if it runs outside of its boundaries. 
+cause the server to crash without warning if it runs outside of its boundaries, which is the reason for the strict validation
+rules.
